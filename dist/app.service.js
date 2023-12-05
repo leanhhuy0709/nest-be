@@ -12,9 +12,38 @@ let AppService = class AppService {
     getHello() {
         return 'Hello world! This is a test code!';
     }
+    postLogin(username, password) {
+        return {
+            accessToken: 'thisIsToken',
+        };
+    }
+    postLogout() {
+        return { message: 'Logout successful' };
+    }
+    getUserInfo() {
+        return 'Testing API';
+    }
+    getUserWishlist() {
+        return 'Testing API';
+    }
+    getDiskInfo(id) {
+        return 'Testing API';
+    }
+    postDiskRecipeMatching(payload) {
+        return 'Testing API';
+    }
+    postDiskSearch(payload) {
+        return 'Testing API';
+    }
+    postRecipeRecognition(payload) {
+        return 'Testing API';
+    }
+    getRecipeInfo(payload) {
+        return 'Testing API';
+    }
 };
-exports.AppService = AppService;
-exports.AppService = AppService = __decorate([
+AppService = __decorate([
     (0, common_1.Injectable)()
 ], AppService);
+exports.AppService = AppService;
 //# sourceMappingURL=app.service.js.map
