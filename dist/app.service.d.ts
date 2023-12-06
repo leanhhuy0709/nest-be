@@ -6,11 +6,11 @@ export declare class AppService {
     postLogout(): {
         message: string;
     };
-    getUserInfo(): string;
-    getUserWishlist(): string;
-    getDiskInfo(id: string): string;
-    postDiskRecipeMatching(payload: any): string;
-    postDiskSearch(payload: any): string;
-    postRecipeRecognition(payload: any): string;
-    getRecipeInfo(payload: any): string;
+    getUserInfo(): any;
+    getUserWishlist(): any;
+    getDiskInfo(id: string): any;
+    postDiskRecipeMatching(payload: any): any;
+    postDiskSearch(payload: any): any;
+    postRecipeRecognition(payload: any): any;
+    getRecipeInfo(payload: any): any;
 }

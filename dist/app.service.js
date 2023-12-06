@@ -14,32 +14,54 @@ let AppService = class AppService {
     }
     postLogin(username, password) {
         return {
-            accessToken: 'thisIsToken',
+            accessToken: username + password,
         };
     }
     postLogout() {
         return { message: 'Logout successful' };
     }
     getUserInfo() {
-        return 'Testing API';
+        return { name: 'your_name', dob: 'dob', gender: 'gender' };
     }
     getUserWishlist() {
-        return 'Testing API';
+        return [
+            {
+                name: 'food_name',
+                description: 'description',
+                recipe: 'recipe',
+            },
+        ];
     }
     getDiskInfo(id) {
-        return 'Testing API';
+        return {
+            name: 'food_name',
+            description: 'description',
+            recipe: 'recipe',
+        };
     }
     postDiskRecipeMatching(payload) {
-        return 'Testing API';
+        return [
+            {
+                id: 'string',
+                name: 'string',
+                matchingScore: 0,
+            },
+        ];
     }
     postDiskSearch(payload) {
-        return 'Testing API';
+        return [
+            {
+                name: 'food_name',
+                description: 'description',
+                recipe: 'recipe',
+            },
+        ];
     }
     postRecipeRecognition(payload) {
-        return 'Testing API';
+        return ['recipe1', 'recipe2'];
     }
     getRecipeInfo(payload) {
-        return 'Testing API';
+        return 'recipe_name';
     }
 };
 AppService = __decorate([
