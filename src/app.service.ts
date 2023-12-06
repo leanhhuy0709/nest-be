@@ -13,7 +13,7 @@ export class AppService {
     accessToken: string;
   } {
     return {
-      accessToken: 'thisIsToken',
+      accessToken: username + password,
     };
   }
 
@@ -23,31 +23,53 @@ export class AppService {
     return { message: 'Logout successful' };
   }
 
-  getUserInfo(): string {
-    return 'Testing API';
+  getUserInfo(): any {
+    return { name: 'your_name', dob: 'dob', gender: 'gender' };
   }
 
-  getUserWishlist(): string {
-    return 'Testing API';
+  getUserWishlist(): any {
+    return [
+      {
+        name: 'food_name',
+        description: 'description',
+        recipe: 'recipe',
+      },
+    ];
   }
 
-  getDiskInfo(id: string): string {
-    return 'Testing API';
+  getDiskInfo(id: string): any {
+    return {
+      name: 'food_name',
+      description: 'description',
+      recipe: 'recipe',
+    };
   }
 
-  postDiskRecipeMatching(payload: any): string {
-    return 'Testing API';
+  postDiskRecipeMatching(payload: any): any {
+    return [
+      {
+        id: 'string',
+        name: 'string',
+        matchingScore: 0,
+      },
+    ];
   }
 
-  postDiskSearch(payload: any): string {
-    return 'Testing API';
+  postDiskSearch(payload: any): any {
+    return [
+      {
+        name: 'food_name',
+        description: 'description',
+        recipe: 'recipe',
+      },
+    ];
   }
 
-  postRecipeRecognition(payload: any): string {
-    return 'Testing API';
+  postRecipeRecognition(payload: any): any {
+    return ['recipe1', 'recipe2'];
   }
 
-  getRecipeInfo(payload: any): string {
-    return 'Testing API';
+  getRecipeInfo(payload: any): any {
+    return 'recipe_name';
   }
 }
