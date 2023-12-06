@@ -216,7 +216,7 @@ __decorate([
         required: true,
         description: 'Token',
     }),
-    __param(0, (0, common_1.Query)('token')),
+    __param(0, (0, common_1.Query)('accessToken')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, UserInfo]),
@@ -235,7 +235,7 @@ __decorate([
         required: true,
         description: 'Token',
     }),
-    __param(0, (0, common_1.Query)('token')),
+    __param(0, (0, common_1.Query)('accessToken')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Object)
@@ -253,7 +253,7 @@ __decorate([
         description: 'User wishlist (food list) retrieved successfully',
         type: WishlistResponse,
     }),
-    __param(0, (0, common_1.Query)('token')),
+    __param(0, (0, common_1.Query)('accessToken')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Object)

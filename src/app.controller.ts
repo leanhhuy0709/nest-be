@@ -169,7 +169,7 @@ export class AppController {
     description: 'Token',
   })
   updateUserInfo(
-    @Query('token') token: string,
+    @Query('accessToken') token: string,
     @Body() requestPayload: UserInfo,
   ): any {
     // Implement logic to retrieve user information
@@ -188,7 +188,7 @@ export class AppController {
     required: true,
     description: 'Token',
   })
-  getUserInfo(@Query('token') token: string): any {
+  getUserInfo(@Query('accessToken') token: string): any {
     // Implement logic to retrieve user information
     return this.appService.getUserInfo();
   }
@@ -205,7 +205,7 @@ export class AppController {
     description: 'User wishlist (food list) retrieved successfully',
     type: WishlistResponse,
   })
-  getUserWishlist(@Query('token') token: string): any {
+  getUserWishlist(@Query('accessToken') token: string): any {
     // Implement logic to retrieve user wishlist
     return this.appService.getUserWishlist();
   }
