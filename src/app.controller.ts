@@ -163,7 +163,15 @@ export class AppController {
     description: 'Update user information successfully',
     type: Message,
   })
-  updateUserInfo(@Body() requestPayload: UserInfo): any {
+  @ApiQuery({
+    name: 'accessToken',
+    required: true,
+    description: 'Token',
+  })
+  updateUserInfo(
+    @Query('token') token: string,
+    @Body() requestPayload: UserInfo,
+  ): any {
     // Implement logic to retrieve user information
     return this.appService.getUserInfo();
   }
@@ -175,19 +183,29 @@ export class AppController {
     description: 'User information retrieved successfully',
     type: UserInfo,
   })
-  getUserInfo(): any {
+  @ApiQuery({
+    name: 'accessToken',
+    required: true,
+    description: 'Token',
+  })
+  getUserInfo(@Query('token') token: string): any {
     // Implement logic to retrieve user information
     return this.appService.getUserInfo();
   }
 
   @Get('/user/wishlist')
   @ApiTags('User')
+  @ApiQuery({
+    name: 'accessToken',
+    required: true,
+    description: 'Token',
+  })
   @ApiResponse({
     status: 200,
     description: 'User wishlist (food list) retrieved successfully',
     type: WishlistResponse,
   })
-  getUserWishlist(): any {
+  getUserWishlist(@Query('token') token: string): any {
     // Implement logic to retrieve user wishlist
     return this.appService.getUserWishlist();
   }

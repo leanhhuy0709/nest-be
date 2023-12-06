@@ -20,9 +20,9 @@ export declare class AppController {
     postLogout(): {
         message: string;
     };
-    updateUserInfo(requestPayload: UserInfo): any;
-    getUserInfo(): any;
-    getUserWishlist(): any;
+    updateUserInfo(token: string, requestPayload: UserInfo): any;
+    getUserInfo(token: string): any;
+    getUserWishlist(token: string): any;
     getDiskInfo(id: string): any;
     postDiskRecipeMatching(requestPayload: RecipeMatchingInput): any;
     postDiskSearch(requestPayload: SearchInput): any;

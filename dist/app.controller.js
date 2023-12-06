@@ -141,13 +141,13 @@ let AppController = class AppController {
     postLogout() {
         return this.appService.postLogout();
     }
-    updateUserInfo(requestPayload) {
+    updateUserInfo(token, requestPayload) {
         return this.appService.getUserInfo();
     }
-    getUserInfo() {
+    getUserInfo(token) {
         return this.appService.getUserInfo();
     }
-    getUserWishlist() {
+    getUserWishlist(token) {
         return this.appService.getUserWishlist();
     }
     getDiskInfo(id) {
@@ -211,9 +211,15 @@ __decorate([
         description: 'Update user information successfully',
         type: Message,
     }),
-    __param(0, (0, common_1.Body)()),
+    (0, swagger_1.ApiQuery)({
+        name: 'accessToken',
+        required: true,
+        description: 'Token',
+    }),
+    __param(0, (0, common_1.Query)('token')),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UserInfo]),
+    __metadata("design:paramtypes", [String, UserInfo]),
     __metadata("design:returntype", Object)
 ], AppController.prototype, "updateUserInfo", null);
 __decorate([
@@ -224,20 +230,32 @@ __decorate([
         description: 'User information retrieved successfully',
         type: UserInfo,
     }),
+    (0, swagger_1.ApiQuery)({
+        name: 'accessToken',
+        required: true,
+        description: 'Token',
+    }),
+    __param(0, (0, common_1.Query)('token')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Object)
 ], AppController.prototype, "getUserInfo", null);
 __decorate([
     (0, common_1.Get)('/user/wishlist'),
     (0, swagger_1.ApiTags)('User'),
+    (0, swagger_1.ApiQuery)({
+        name: 'accessToken',
+        required: true,
+        description: 'Token',
+    }),
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'User wishlist (food list) retrieved successfully',
         type: WishlistResponse,
     }),
+    __param(0, (0, common_1.Query)('token')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Object)
 ], AppController.prototype, "getUserWishlist", null);
 __decorate([
