@@ -1,118 +1,19 @@
-import { Body, Controller, Get, Post, Query, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ApiQuery, ApiResponse, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse, ApiTags, ApiBody } from '@nestjs/swagger';
 
-class LoginResponse {
-  @ApiProperty({ example: 'your_access_token_here' })
-  accessToken: string;
-}
-
-class Message {
-  @ApiProperty({ example: 'Successful' })
-  message: string;
-}
-
-class UserInfo {
-  @ApiProperty({
-    example: { name: 'your_name', dob: 'dob', gender: 'gender' },
-  })
-  payload: string;
-}
-
-class WishlistResponse {
-  // Define properties for the wishlist response (food list)
-  @ApiProperty({
-    examples: [
-      {
-        name: 'food_name',
-        description: 'description',
-        recipe: 'recipe',
-      },
-    ],
-  })
-  payload: string;
-}
-
-class DiskInfoResponse {
-  // Define properties for the disk information response
-  @ApiProperty({
-    examples: {
-      name: 'food_name',
-      description: 'description',
-      recipe: 'recipe',
-    },
-  })
-  payload: string;
-}
-
-class RecipeMatchingInput {
-  // Define properties for the recipe matching response
-  @ApiProperty({
-    example: [
-      {
-        id: 'food_id_1',
-      },
-      {
-        id: 'food_id_2',
-      },
-    ],
-  })
-  recipes: string[];
-}
-
-class RecipeMatchingResponse {
-  // Define properties for the recipe matching response
-  @ApiProperty({
-    example: [
-      {
-        id: 'string',
-        name: 'string',
-        matchingScore: 0,
-      },
-    ],
-  })
-  disks: string[];
-}
-
-class SearchInput {
-  // Define properties for the search response
-  @ApiProperty({
-    example: { keyword: 'your_keyword', filter: ['rice', 'meat'] },
-  })
-  payload: string;
-}
-
-class SearchResponse {
-  // Define properties for the search response
-  @ApiProperty({
-    example: [
-      {
-        name: 'food_name',
-        description: 'description',
-        recipe: 'recipe',
-      },
-    ],
-  })
-  foodList: DiskInfoResponse[];
-}
-
-class RecipeRecognitionInput {
-  // Define properties for the recipe recognition response
-  @ApiProperty({ example: 'your_image_href' })
-  imageHref: string;
-}
-
-class RecipeRecognitionResponse {
-  // Define properties for the recipe recognition response
-  @ApiProperty({ example: ['recipe1', 'recipe2'] })
-  recipeList: string[];
-}
-
-class RecipeIdResponse {
-  // Define properties for the recipe ID response
-  @ApiProperty({ example: 'recipe_name' })
-  recipe: string;
-}
+import {
+  LoginResponse,
+  UserInfo,
+  Message,
+  DiskInfo,
+  RecipeInfo,
+  SearchInput,
+  SearchResponse,
+  RecipeMatchingInput,
+  RecipeMatchingResponse,
+  WishlistResponse,
+} from './common/types';
 
 @Controller()
 export class AppController {
@@ -120,27 +21,30 @@ export class AppController {
 
   @Post('/user/login')
   @ApiTags('User')
-  @ApiQuery({
-    name: 'username',
-    required: true,
-    description: 'Username for login',
-  })
-  @ApiQuery({
-    name: 'password',
-    required: true,
-    description: 'Password for login',
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        username: { type: 'string', example: 'john_doe' },
+        password: { type: 'string', example: '123456' },
+      },
+    },
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully logged in',
     type: LoginResponse,
   })
+  @ApiResponse({
+    status: 201,
+    description: 'Successfully logged in',
+    type: LoginResponse,
+  })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   postLogin(
-    @Query('username') username: string,
-    @Query('password') password: string,
-  ): { accessToken: string } {
-    return this.appService.postLogin(username, password);
+    @Body() body: { username: string; password: string },
+  ): LoginResponse {
+    return this.appService.postLogin(body.username, body.password);
   }
 
   @Post('/user/logout')
@@ -150,30 +54,8 @@ export class AppController {
     description: 'Logout successful',
     type: Message,
   })
-  postLogout(): {
-    message: string;
-  } {
+  postLogout(): Message {
     return this.appService.postLogout();
-  }
-
-  @Put('/user/info')
-  @ApiTags('User')
-  @ApiResponse({
-    status: 200,
-    description: 'Update user information successfully',
-    type: Message,
-  })
-  @ApiQuery({
-    name: 'accessToken',
-    required: true,
-    description: 'Token',
-  })
-  updateUserInfo(
-    @Query('accessToken') token: string,
-    @Body() requestPayload: UserInfo,
-  ): any {
-    // Implement logic to retrieve user information
-    return this.appService.getUserInfo();
   }
 
   @Get('/user/info')
@@ -184,33 +66,31 @@ export class AppController {
     type: UserInfo,
   })
   @ApiQuery({
-    name: 'accessToken',
+    name: 'token',
     required: true,
-    description: 'Token',
+    description: 'Your access token',
   })
-  getUserInfo(@Query('accessToken') token: string): any {
-    // Implement logic to retrieve user information
-    return this.appService.getUserInfo();
+  getUserInfo(@Query('token') token: string): UserInfo | Message {
+    return this.appService.getUserInfo(token);
   }
 
-  @Get('/user/wishlist')
+  @Get('/user/user_list')
   @ApiTags('User')
-  @ApiQuery({
-    name: 'accessToken',
-    required: true,
-    description: 'Token',
-  })
   @ApiResponse({
     status: 200,
-    description: 'User wishlist (food list) retrieved successfully',
-    type: WishlistResponse,
+    description: 'Users information retrieved successfully',
+    type: [UserInfo],
   })
-  getUserWishlist(@Query('accessToken') token: string): any {
-    // Implement logic to retrieve user wishlist
-    return this.appService.getUserWishlist();
+  @ApiQuery({
+    name: 'token',
+    required: true,
+    description: 'Your access token',
+  })
+  getUserList(@Query('token') token: string): UserInfo[] | Message {
+    return this.appService.getUserList(token);
   }
 
-  @Get('/disk/:id')
+  @Get('/disk/disk')
   @ApiTags('Disk')
   @ApiQuery({
     name: 'id',
@@ -220,50 +100,47 @@ export class AppController {
   @ApiResponse({
     status: 200,
     description: 'Disk information retrieved successfully',
-    type: DiskInfoResponse,
+    type: DiskInfo,
   })
-  getDiskInfo(@Query('id') id: string): any {
-    // Implement logic to retrieve disk information based on the provided ID
+  getDiskInfo(@Query('id') id: string): DiskInfo | Message {
     return this.appService.getDiskInfo(id);
-  }
-
-  @Post('/disk/recipe-matching')
-  @ApiTags('Disk')
-  @ApiResponse({
-    status: 200,
-    description: 'Recipe matching successful',
-    type: RecipeMatchingResponse,
-  })
-  postDiskRecipeMatching(@Body() requestPayload: RecipeMatchingInput): any {
-    // Implement logic to perform recipe matching based on the request payload
-    return this.appService.postDiskRecipeMatching(requestPayload);
   }
 
   @Post('/disk/search')
   @ApiTags('Disk')
   @ApiResponse({
     status: 200,
-    description: 'Search successful',
+    description: 'Search disk item successfully',
     type: SearchResponse,
   })
-  postDiskSearch(@Body() requestPayload: SearchInput): any {
+  postDiskSearch(@Body() payload: SearchInput): DiskInfo[] {
     // Implement logic to perform search based on the request payload
-    return this.appService.postDiskSearch(requestPayload);
+    return this.appService.postDiskSearch(payload.keyword, payload.filter);
   }
 
   @Post('/recipe/recognition')
   @ApiTags('Recipe')
   @ApiResponse({
     status: 200,
-    description: 'Recipe recognition successful',
-    type: RecipeRecognitionResponse,
+    description: 'Recipe recognition successfully',
+    type: [RecipeInfo],
   })
-  postRecipeRecognition(@Body() requestPayload: RecipeRecognitionInput): any {
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        href: { type: 'string', example: 'http://your_image_link.com' },
+      },
+    },
+  })
+  postRecipeRecognition(
+    @Body() requestPayload: { href: string },
+  ): RecipeInfo[] {
     // Implement logic to perform recipe recognition based on the request payload
-    return this.appService.postRecipeRecognition(requestPayload);
+    return this.appService.postRecipeRecognition(requestPayload.href);
   }
 
-  @Get('/recipe/:id')
+  @Get('/recipe/recipe')
   @ApiTags('Recipe')
   @ApiQuery({
     name: 'id',
@@ -273,10 +150,39 @@ export class AppController {
   @ApiResponse({
     status: 200,
     description: 'Recipe information retrieved successfully',
-    type: RecipeIdResponse,
+    type: RecipeInfo,
   })
-  getRecipeInfo(@Query('id') id: string): any {
-    // Implement logic to retrieve recipe information based on the provided ID
+  getRecipeInfo(@Query('id') id: string): RecipeInfo | Message {
     return this.appService.getRecipeInfo(id);
+  }
+
+  @Get('/user/wishlist')
+  @ApiTags('User')
+  @ApiQuery({
+    name: 'token',
+    required: true,
+    description: 'Your access token',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'User wishlist (disk list) retrieved successfully',
+    type: WishlistResponse,
+  })
+  getUserWishlist(@Query('token') token: string): WishlistResponse | Message {
+    // Implement logic to retrieve user wishlist
+    return this.appService.getUserWishlist(token);
+  }
+
+  @Post('/disk/recipe-matching')
+  @ApiTags('Disk')
+  @ApiResponse({
+    status: 200,
+    description: 'Recipe matching successful',
+    type: [RecipeMatchingResponse],
+  })
+  postDiskRecipeMatching(
+    @Body() requestPayload: RecipeMatchingInput,
+  ): RecipeMatchingResponse[] {
+    return this.appService.postDiskRecipeMatching(requestPayload.recipes);
   }
 }

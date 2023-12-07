@@ -1,0 +1,388 @@
+{
+  "users": [
+    {
+      "username": "john_doe",
+      "password": "123456",
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "dob": "1990-01-01",
+      "phone_number": "0123456789",
+      "wish_list": ["1", "2"]
+    },
+    {
+      "username": "jane_smith",
+      "password": "abcdef",
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "dob": "1995-05-15",
+      "phone_number": "0987654321",
+      "wish_list": []
+    },
+    {
+      "username": "bob_jones",
+      "password": "qwerty",
+      "name": "Bob Jones",
+      "email": "bobjones@example.com",
+      "dob": "1988-08-20",
+      "phone_number": "0765432109",
+      "wish_list": ["12"]
+    },
+    {
+      "username": "alice_wonder",
+      "password": "alicepass",
+      "name": "Alice Wonderland",
+      "email": "alicewonder@example.com",
+      "dob": "1992-03-30",
+      "phone_number": "0345678901",
+      "wish_list": ["7", "10"]
+    },
+    {
+      "username": "sam_taylor",
+      "password": "sam123",
+      "name": "Sam Taylor",
+      "email": "samtaylor@example.com",
+      "dob": "1985-12-10",
+      "phone_number": "0555123456",
+      "wish_list": ["8"]
+    },
+    {
+      "username": "emily_rose",
+      "password": "rose789",
+      "name": "Emily Rose",
+      "email": "emilyrose@example.com",
+      "dob": "1998-07-25",
+      "phone_number": "0909090909",
+      "wish_list": []
+    },
+    {
+      "username": "mike_jackson",
+      "password": "mikepass",
+      "name": "Mike Jackson",
+      "email": "mikejackson@example.com",
+      "dob": "1983-04-18",
+      "phone_number": "0312345678",
+      "wish_list": ["2"]
+    },
+    {
+      "username": "lisa_miller",
+      "password": "lisa456",
+      "name": "Lisa Miller",
+      "email": "lisamiller@example.com",
+      "dob": "1993-11-05",
+      "phone_number": "0707070707",
+      "wish_list": []
+    },
+    {
+      "username": "david_clark",
+      "password": "clarkpass",
+      "name": "David Clark",
+      "email": "davidclark@example.com",
+      "dob": "1980-09-12",
+      "phone_number": "0888888888",
+      "wish_list": ["3"]
+    },
+    {
+      "username": "sara_white",
+      "password": "sara789",
+      "name": "Sara White",
+      "email": "sarawhite@example.com",
+      "dob": "1996-02-28",
+      "phone_number": "0999999999",
+      "wish_list": ["4", "6", "1"]
+    }
+  ],
+  "disks": [
+    {
+      "id": "1",
+      "name": "Spicy Beef Stir-Fry",
+      "recipes": ["Beef", "Bell Peppers", "Onions", "Garlic", "Soy Sauce"],
+      "description": "A delicious and spicy beef stir-fry with colorful bell peppers and onions.",
+      "href": ""
+    },
+    {
+      "id": "2",
+      "name": "Vegetarian Pasta Primavera",
+      "recipes": ["Pasta", "Vegetables", "Tomatoes", "Garlic", "Olive Oil"],
+      "description": "A light and flavorful pasta dish loaded with fresh vegetables and olive oil.",
+      "href": ""
+    },
+    {
+      "id": "3",
+      "name": "Salmon with Lemon-Dill Sauce",
+      "recipes": ["Salmon", "Dill", "Lemon", "Garlic"],
+      "description": "Grilled salmon fillets topped with a zesty lemon-dill sauce.",
+      "href": ""
+    },
+    {
+      "id": "4",
+      "name": "Chicken Alfredo",
+      "recipes": ["Chicken", "Pasta", "Parmesan", "Garlic", "Cream"],
+      "description": "Creamy chicken Alfredo pasta with Parmesan and garlic.",
+      "href": ""
+    },
+    {
+      "id": "5",
+      "name": "Mushroom Risotto",
+      "recipes": ["Rice", "Mushrooms", "Onions", "Garlic", "Chicken Broth"],
+      "description": "A classic mushroom risotto cooked to perfection with arborio rice and chicken broth.",
+      "href": ""
+    },
+    {
+      "id": "6",
+      "name": "Grilled Lamb Chops",
+      "recipes": ["Lamb", "Rosemary", "Garlic", "Olive Oil"],
+      "description": "Juicy grilled lamb chops seasoned with rosemary and garlic.",
+      "href": ""
+    },
+    {
+      "id": "7",
+      "name": "Caprese Salad",
+      "recipes": ["Tomatoes", "Mozzarella", "Basil", "Olive Oil", "Balsamic Vinegar"],
+      "description": "A refreshing Caprese salad with ripe tomatoes, fresh mozzarella, and basil.",
+      "href": ""
+    },
+    {
+      "id": "8",
+      "name": "Stuffed Bell Peppers",
+      "recipes": ["Bell Peppers", "Beef", "Rice", "Tomatoes", "Onions"],
+      "description": "Bell peppers stuffed with a flavorful mixture of beef, rice, and tomatoes.",
+      "href": ""
+    },
+    {
+      "id": "9",
+      "name": "Cabbage Rolls",
+      "recipes": ["Cabbage", "Beef", "Rice", "Tomatoes", "Onions"],
+      "description": "Savory cabbage rolls filled with a delicious mixture of beef, rice, and tomatoes.",
+      "href": ""
+    },
+    {
+      "id": "10",
+      "name": "Eggplant Parmesan",
+      "recipes": ["Eggplant", "Tomatoes", "Parmesan", "Basil"],
+      "description": "Baked eggplant slices layered with marinara sauce, Parmesan, and fresh basil.",
+      "href": ""
+    },
+    {
+      "id": "11",
+      "name": "Shrimp Scampi",
+      "recipes": ["Shrimp", "Garlic", "Lemon", "Pasta", "Butter"],
+      "description": "Lemon-garlic shrimp scampi served over a bed of linguine pasta.",
+      "href": ""
+    },
+    {
+      "id": "12",
+      "name": "Spinach and Feta Stuffed Chicken",
+      "recipes": ["Chicken", "Spinach", "Feta", "Garlic"],
+      "description": "Tender chicken breasts stuffed with spinach and feta, baked to perfection.",
+      "href": ""
+    },
+    {
+      "id": "13",
+      "name": "Tomato Basil Soup",
+      "recipes": ["Tomatoes", "Basil", "Onions", "Garlic", "Chicken Broth"],
+      "description": "Comforting tomato basil soup made with fresh tomatoes, basil, and chicken broth.",
+      "href": ""
+    },
+    {
+      "id": "14",
+      "name": "Avocado and Chicken Wrap",
+      "recipes": ["Chicken", "Avocado", "Lettuce", "Tomatoes", "Cheese"],
+      "description": "A delicious and healthy wrap with grilled chicken, avocado, and fresh veggies.",
+      "href": ""
+    },
+    {
+      "id": "15",
+      "name": "Lemon Herb Roasted Potatoes",
+      "recipes": ["Potatoes", "Lemon", "Rosemary", "Garlic", "Olive Oil"],
+      "description": "Crispy roasted potatoes seasoned with lemon, herbs, and olive oil.",
+      "href": ""
+    },
+    {
+      "id": "16",
+      "name": "Beef and Broccoli Stir-Fry",
+      "recipes": ["Beef", "Broccoli", "Soy Sauce", "Garlic", "Ginger"],
+      "description": "Classic beef and broccoli stir-fry with a savory soy-based sauce.",
+      "href": ""
+    },
+    {
+      "id": "17",
+      "name": "Egg Fried Rice",
+      "recipes": ["Egg", "Rice", "Peas", "Carrots", "Soy Sauce"],
+      "description": "Homemade egg fried rice with a mix of vegetables and soy sauce.",
+      "href": ""
+    },
+    {
+      "id": "18",
+      "name": "Cilantro Lime Chicken",
+      "recipes": ["Chicken", "Cilantro", "Lime", "Garlic", "Olive Oil"],
+      "description": "Grilled cilantro lime chicken with a zesty and flavorful marinade.",
+      "href": ""
+    },
+    {
+      "id": "19",
+      "name": "Herb-Crusted Salmon",
+      "recipes": ["Salmon", "Herbs", "Garlic", "Lemon"],
+      "description": "Salmon fillets coated in a delicious herb crust and baked to perfection.",
+      "href": ""
+    },
+    {
+      "id": "20",
+      "name": "Stuffed Mushrooms",
+      "recipes": ["Mushrooms", "Cream Cheese", "Garlic", "Parmesan"],
+      "description": "Savory stuffed mushrooms filled with cream cheese, garlic, and Parmesan.",
+      "href": ""
+    }
+  ],
+  "recipes": [
+    {
+      "id": "1",
+      "name": "Meat",
+      "href": ""
+    },
+    {
+      "id": "2",
+      "name": "Vegetables",
+      "href": ""
+    },
+    {
+      "id": "3",
+      "name": "Fish",
+      "href": ""
+    },
+    {
+      "id": "4",
+      "name": "Pasta",
+      "href": ""
+    },
+    {
+      "id": "5",
+      "name": "Chicken",
+      "href": ""
+    },
+    {
+      "id": "6",
+      "name": "Rice",
+      "href": ""
+    },
+    {
+      "id": "7",
+      "name": "Cheese",
+      "href": ""
+    },
+    {
+      "id": "8",
+      "name": "Spices",
+      "href": ""
+    },
+    {
+      "id": "9",
+      "name": "Seafood",
+      "href": ""
+    },
+    {
+      "id": "10",
+      "name": "Herbs",
+      "href": ""
+    },
+    {
+      "id": "11",
+      "name": "Eggplant",
+      "href": ""
+    },
+    {
+      "id": "12",
+      "name": "Beef",
+      "href": ""
+    },
+    {
+      "id": "13",
+      "name": "Tomatoes",
+      "href": ""
+    },
+    {
+      "id": "14",
+      "name": "Onions",
+      "href": ""
+    },
+    {
+      "id": "15",
+      "name": "Garlic",
+      "href": ""
+    },
+    {
+      "id": "16",
+      "name": "Lettuce",
+      "href": ""
+    },
+    {
+      "id": "17",
+      "name": "Shrimp",
+      "href": ""
+    },
+    {
+      "id": "18",
+      "name": "Mushrooms",
+      "href": ""
+    },
+    {
+      "id": "19",
+      "name": "Salmon",
+      "href": ""
+    },
+    {
+      "id": "20",
+      "name": "Bread",
+      "href": ""
+    },
+    {
+      "id": "21",
+      "name": "Lamb",
+      "href": ""
+    },
+    {
+      "id": "22",
+      "name": "Potatoes",
+      "href": ""
+    },
+    {
+      "id": "23",
+      "name": "Carrots",
+      "href": ""
+    },
+    {
+      "id": "24",
+      "name": "Spinach",
+      "href": ""
+    },
+    {
+      "id": "25",
+      "name": "Cabbage",
+      "href": ""
+    },
+    {
+      "id": "26",
+      "name": "Olive Oil",
+      "href": ""
+    },
+    {
+      "id": "27",
+      "name": "Bell Peppers",
+      "href": ""
+    },
+    {
+      "id": "28",
+      "name": "Avocado",
+      "href": ""
+    },
+    {
+      "id": "29",
+      "name": "Cilantro",
+      "href": ""
+    },
+    {
+      "id": "30",
+      "name": "Soy Sauce",
+      "href": ""
+    }
+  ]
+}

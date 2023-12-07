@@ -1,32 +1,21 @@
 import { AppService } from './app.service';
-declare class UserInfo {
-    payload: string;
-}
-declare class RecipeMatchingInput {
-    recipes: string[];
-}
-declare class SearchInput {
-    payload: string;
-}
-declare class RecipeRecognitionInput {
-    imageHref: string;
-}
+import { LoginResponse, UserInfo, Message, DiskInfo, RecipeInfo, SearchInput, RecipeMatchingInput, RecipeMatchingResponse, WishlistResponse } from './common/types';
 export declare class AppController {
     private readonly appService;
     constructor(appService: AppService);
-    postLogin(username: string, password: string): {
-        accessToken: string;
-    };
-    postLogout(): {
-        message: string;
-    };
-    updateUserInfo(token: string, requestPayload: UserInfo): any;
-    getUserInfo(token: string): any;
-    getUserWishlist(token: string): any;
-    getDiskInfo(id: string): any;
-    postDiskRecipeMatching(requestPayload: RecipeMatchingInput): any;
-    postDiskSearch(requestPayload: SearchInput): any;
-    postRecipeRecognition(requestPayload: RecipeRecognitionInput): any;
-    getRecipeInfo(id: string): any;
+    postLogin(body: {
+        username: string;
+        password: string;
+    }): LoginResponse;
+    postLogout(): Message;
+    getUserInfo(token: string): UserInfo | Message;
+    getUserList(token: string): UserInfo[] | Message;
+    getDiskInfo(id: string): DiskInfo | Message;
+    postDiskSearch(payload: SearchInput): DiskInfo[];
+    postRecipeRecognition(requestPayload: {
+        href: string;
+    }): RecipeInfo[];
+    getRecipeInfo(id: string): RecipeInfo | Message;
+    getUserWishlist(token: string): WishlistResponse | Message;
+    postDiskRecipeMatching(requestPayload: RecipeMatchingInput): RecipeMatchingResponse[];
 }
-export {};

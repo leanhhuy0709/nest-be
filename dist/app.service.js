@@ -5,67 +5,143 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
+const app_data_1 = require("./data/app.data");
+const crypto_1 = require("crypto");
+const jwt_1 = require("@nestjs/jwt");
 let AppService = class AppService {
-    getHello() {
-        return 'Hello world! This is a test code!';
+    constructor(jwtService) {
+        this.jwtService = jwtService;
     }
     postLogin(username, password) {
+        const userData = (0, app_data_1.getUserData)();
+        for (let i = 0; i < userData.length; i++) {
+            if (userData[i].username === username &&
+                userData[i].password === password) {
+                const payload = { username };
+                const token = this.jwtService.sign(payload);
+                return {
+                    token,
+                    message: 'Logged in successfully',
+                };
+            }
+        }
         return {
-            accessToken: username + password,
+            token: '',
+            message: 'Your username or password is incorrect!',
         };
     }
     postLogout() {
         return { message: 'Logout successful' };
     }
-    getUserInfo() {
-        return { name: 'your_name', dob: 'dob', gender: 'gender' };
+    getUserInfo(token) {
+        const userData = (0, app_data_1.getUserData)();
+        const payload = this.jwtService.decode(token);
+        for (let i = 0; i < userData.length; i++) {
+            if (userData[i].username === payload.username)
+                return userData[i];
+        }
+        return { message: 'User not found!' };
     }
-    getUserWishlist() {
-        return [
-            {
-                name: 'food_name',
-                description: 'description',
-                recipe: 'recipe',
-            },
-        ];
+    getUserList(token) {
+        const userData = (0, app_data_1.getUserData)();
+        const payload = this.jwtService.decode(token);
+        for (let i = 0; i < userData.length; i++) {
+            if (userData[i].username === payload.username)
+                return userData;
+        }
+        return { message: 'You do not have access!' };
     }
     getDiskInfo(id) {
-        return {
-            name: 'food_name',
-            description: 'description',
-            recipe: 'recipe',
-        };
+        const diskData = (0, app_data_1.getDiskData)();
+        for (let i = 0; i < diskData.length; i++) {
+            if (diskData[i].id === id)
+                return diskData[i];
+        }
+        return { message: 'Disk item not found!' };
     }
-    postDiskRecipeMatching(payload) {
-        return [
-            {
-                id: 'string',
-                name: 'string',
-                matchingScore: 0,
-            },
-        ];
+    postDiskSearch(keyword, filter) {
+        const diskData = (0, app_data_1.getDiskData)();
+        const result = [];
+        for (let i = 0; i < diskData.length; i++) {
+            if (diskData[i].name.includes(keyword)) {
+                for (let j = 0; j < filter.length; j++) {
+                    if (diskData[i].recipes.indexOf(filter[j]) == -1) {
+                        break;
+                    }
+                    if (j === filter.length - 1) {
+                        result.push(diskData[i]);
+                    }
+                }
+            }
+        }
+        return result;
     }
-    postDiskSearch(payload) {
-        return [
-            {
-                name: 'food_name',
-                description: 'description',
-                recipe: 'recipe',
-            },
-        ];
+    postRecipeRecognition(href) {
+        const recipeData = (0, app_data_1.getRecipeData)();
+        const maxRecipeNumber = 10 < recipeData.length ? 10 : recipeData.length;
+        const rdNumber = (0, crypto_1.randomInt)(maxRecipeNumber);
+        const temp = [];
+        for (let i = 0; i < rdNumber; i++) {
+            let rd = (0, crypto_1.randomInt)(recipeData.length);
+            while (temp.indexOf(rd) != -1) {
+                rd = (0, crypto_1.randomInt)(recipeData.length);
+            }
+            temp.push(rd);
+        }
+        const result = [];
+        for (let i = 0; i < temp.length; i++) {
+            result.push(recipeData[temp[i]]);
+        }
+        return result;
     }
-    postRecipeRecognition(payload) {
-        return ['recipe1', 'recipe2'];
+    getRecipeInfo(id) {
+        const recipeData = (0, app_data_1.getRecipeData)();
+        for (let i = 0; i < recipeData.length; i++) {
+            if (recipeData[i].id === id)
+                return recipeData[i];
+        }
+        return { message: 'Recipe item not found!' };
     }
-    getRecipeInfo(payload) {
-        return 'recipe_name';
+    getUserWishlist(token) {
+        const userData = (0, app_data_1.getUserData)();
+        const payload = this.jwtService.decode(token);
+        for (let i = 0; i < userData.length; i++) {
+            if (userData[i].username === payload.username)
+                return {
+                    wishlist: userData[i].wish_list,
+                };
+        }
+        return { message: 'User not found!' };
+    }
+    postDiskRecipeMatching(recipeNames) {
+        const diskData = (0, app_data_1.getDiskData)();
+        const result = [];
+        for (let i = 0; i < diskData.length; i++) {
+            let matchingScore = 0;
+            for (let j = 0; j < recipeNames.length; j++) {
+                if (diskData[i].recipes.indexOf(recipeNames[j]) != -1) {
+                    matchingScore++;
+                }
+            }
+            matchingScore = Math.round((matchingScore * 100) / recipeNames.length);
+            if (matchingScore > 0)
+                result.push({
+                    diskInfo: diskData[i],
+                    matchingScore,
+                });
+        }
+        return result;
     }
 };
 AppService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [jwt_1.JwtService])
 ], AppService);
 exports.AppService = AppService;
 //# sourceMappingURL=app.service.js.map
